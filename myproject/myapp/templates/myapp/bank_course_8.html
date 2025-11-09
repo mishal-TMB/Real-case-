@@ -1,0 +1,262 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сбербанк - Урок 8</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Фон */
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .background-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Основной контейнер */
+        .main-container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            gap: clamp(20px, 3vw, 40px);
+        }
+
+        /* Широкая фотография флекс */
+        .wide-image-flex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 95%;
+            max-width: 1400px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: clamp(15px, 2vw, 25px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            min-height: 200px;
+        }
+
+        .wide-image {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Флекс с текстом */
+        .text-flex {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 95%;
+            max-width: 1400px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: clamp(25px, 4vw, 50px);
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            min-height: 300px;
+        }
+
+        /* Текст */
+        .course-text {
+            font-size: clamp(1.2rem, 2vw, 2.5rem);
+            color: white;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: clamp(15px, 2vw, 25px);
+            line-height: 1.4;
+            width: 100%;
+        }
+
+        /* Кнопка Далее */
+        .next-button {
+            width: clamp(80px, 10vw, 150px);
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: absolute;
+            bottom: clamp(15px, 2vw, 25px);
+            right: clamp(15px, 2vw, 25px);
+        }
+
+        .next-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Кнопка Назад */
+        .back-button {
+            width: clamp(70px, 8vw, 120px);
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: absolute;
+            bottom: clamp(15px, 2vw, 25px);
+            left: clamp(15px, 2vw, 25px);
+        }
+
+        .back-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1200px) {
+            .wide-image {
+                max-height: 250px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .wide-image-flex {
+                min-height: 180px;
+            }
+
+            .text-flex {
+                min-height: 280px;
+            }
+
+            .wide-image {
+                max-height: 220px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 15px;
+                gap: 15px;
+            }
+
+            .wide-image-flex {
+                width: 98%;
+                min-height: 160px;
+                padding: 12px;
+            }
+
+            .text-flex {
+                width: 98%;
+                min-height: 250px;
+                padding: 20px;
+            }
+
+            .wide-image {
+                max-height: 180px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-container {
+                padding: 10px;
+                gap: 12px;
+            }
+
+            .wide-image-flex {
+                width: 100%;
+                min-height: 140px;
+                padding: 10px;
+            }
+
+            .text-flex {
+                width: 100%;
+                min-height: 220px;
+                padding: 15px;
+            }
+
+            .wide-image {
+                max-height: 150px;
+            }
+
+            .course-text {
+                font-size: clamp(1rem, 1.5vw, 1.8rem);
+            }
+
+            .next-button, .back-button {
+                width: 60px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .wide-image-flex {
+                min-height: 120px;
+            }
+
+            .text-flex {
+                min-height: 200px;
+            }
+
+            .wide-image {
+                max-height: 120px;
+            }
+
+            .course-text {
+                font-size: 0.9rem;
+            }
+
+            .next-button, .back-button {
+                width: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Фон -->
+    <div class="background-container">
+        <img src="{% static 'myapp/images/main1.png' %}" alt="Фон" class="background-image">
+    </div>
+
+    <!-- Основной контейнер -->
+    <div class="main-container">
+        <!-- Широкая фотография -->
+        <div class="wide-image-flex">
+            <img src="{% static 'myapp/images/banktut31.png' %}" alt="Широкая фотография" class="wide-image">
+        </div>
+
+        <!-- Флекс с текстом -->
+        <div class="text-flex">
+            <div class="course-text">
+                ЧТОБЫ ПЕРЕЙТИ К ПЛАТЕЖАМ, ВАМ НУЖНО ВЫБРАТЬ ИХ В САМОМ НИЖНЕМ МЕНЮ ПРИЛОЖЕНИЯ
+            </div>
+            <div class="course-text">
+            </div>
+
+            <!-- Кнопка Назад -->
+            <a href="{% url 'bank_course_7' %}">
+                <img src="{% static 'myapp/images/back.png' %}" alt="Назад" class="back-button">
+            </a>
+
+            <!-- Кнопка Далее -->
+            <a href="{% url 'bank_course_9' %}">
+                <img src="{% static 'myapp/images/start.png' %}" alt="Далее" class="next-button">
+            </a>
+        </div>
+    </div>
+</body>
+</html>

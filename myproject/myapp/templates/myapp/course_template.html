@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            min-height: 100vh;
+        }
+
+        /* Фон */
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .background-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Основной контейнер */
+        .main-container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Центральный флекс-контейнер */
+        .center-flex {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 90%;
+            max-width: 1200px;
+            height: 80vh;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: clamp(20px, 3vw, 40px);
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Основная картинка */
+        .main-image {
+            width: 100%;
+            height: auto;
+            max-height: 70%;
+            object-fit: contain;
+            border-radius: 15px;
+            margin-bottom: clamp(15px, 2vw, 30px);
+        }
+
+        /* Текст */
+        .course-text {
+            font-size: clamp(1.2rem, 2.5vw, 2.5rem);
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: clamp(15px, 2vw, 30px);
+            line-height: 1.4;
+        }
+
+        /* Кнопка Start в правом нижнем углу флекса */
+        .start-button {
+            position: absolute;
+            bottom: clamp(15px, 2vw, 30px);
+            right: clamp(15px, 2vw, 30px);
+            width: clamp(80px, 10vw, 150px);
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .start-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .center-flex {
+                width: 95%;
+                height: 75vh;
+                padding: 15px;
+            }
+
+            .main-image {
+                max-height: 60%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .center-flex {
+                width: 98%;
+                height: 70vh;
+                padding: 10px;
+            }
+
+            .main-image {
+                max-height: 50%;
+            }
+
+            .start-button {
+                width: 70px;
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .center-flex {
+                height: 65vh;
+            }
+
+            .main-image {
+                max-height: 45%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Фон -->
+    <div class="background-container">
+        <img src="{% static 'myapp/images/main1.png' %}" alt="Фон" class="background-image">
+    </div>
+
+    <!-- Основной контент -->
+    <div class="main-container">
+        <div class="center-flex">
+
+            <!-- Текст -->
+            <div class="course-text">
+                {{ course_text }}
+            </div>
+
+            <!-- Кнопка Start -->
+            <a href="{% url next_page %}">
+                <img src="{% static 'myapp/images/start.png' %}" alt="Start" class="start-button">
+            </a>
+        </div>
+    </div>
+</body>
+</html>

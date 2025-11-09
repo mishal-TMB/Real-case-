@@ -1,0 +1,334 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сбербанк - Урок 6</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Фон */
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .background-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Основной контейнер */
+        .main-container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            gap: clamp(30px, 4vw, 60px);
+        }
+
+        /* Контейнер с 3 флексами в ряд */
+        .three-flex-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 95%;
+            max-width: 1400px;
+            gap: clamp(20px, 3vw, 40px);
+        }
+
+        /* Отдельный флекс */
+        .flex-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: clamp(20px, 3vw, 35px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            min-height: 700px; /* УВЕЛИЧЕНО В 2 РАЗА */
+        }
+
+        /* Картинки в флексах - ОЧЕНЬ БОЛЬШИЕ */
+        .flex-image {
+            width: 100%;
+            height: auto;
+            max-height: 550px; /* УВЕЛИЧЕНО В 2 РАЗА */
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: clamp(15px, 2vw, 25px);
+        }
+
+        /* Текст под картинками */
+        .flex-text {
+            font-size: clamp(0.9rem, 1.3vw, 1.6rem);
+            color: white;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            line-height: 1.3;
+        }
+
+        /* Нижний флекс с картинкой и текстом */
+        .bottom-flex {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 95%;
+            max-width: 1400px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: clamp(25px, 4vw, 50px);
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            min-height: 400px; /* УВЕЛИЧЕНО */
+        }
+
+        /* Основная картинка в нижнем флексе */
+        .main-image {
+            width: 100%;
+            height: auto;
+            max-height: 600px; /* УВЕЛИЧЕНО В 2 РАЗА */
+            object-fit: contain;
+            border-radius: 15px;
+            margin-bottom: clamp(10px, 1.5vw, 20px);
+        }
+
+        /* Текст в нижнем флексе */
+        .course-text {
+            font-size: clamp(1.2rem, 1.8vw, 2.2rem);
+            color: white;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: clamp(15px, 2vw, 25px);
+            line-height: 1.4;
+            width: 100%;
+        }
+
+        /* Кнопка Далее */
+        .next-button {
+            width: clamp(80px, 10vw, 150px);
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: absolute;
+            bottom: clamp(15px, 2vw, 25px);
+            right: clamp(15px, 2vw, 25px);
+        }
+
+        .next-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Кнопка Назад */
+        .back-button {
+            width: clamp(70px, 8vw, 120px);
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: absolute;
+            bottom: clamp(15px, 2vw, 25px);
+            left: clamp(15px, 2vw, 25px);
+        }
+
+        .back-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1200px) {
+            .flex-image {
+                max-height: 450px; /* УВЕЛИЧЕНО */
+            }
+
+            .main-image {
+                max-height: 500px; /* УВЕЛИЧЕНО */
+            }
+
+            .flex-item {
+                min-height: 600px; /* УВЕЛИЧЕНО */
+            }
+        }
+
+        @media (max-width: 992px) {
+            .three-flex-container {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .flex-item {
+                flex: 0 1 calc(50% - 20px);
+                min-width: 350px;
+                min-height: 550px; /* УВЕЛИЧЕНО */
+            }
+
+            .flex-image {
+                max-height: 400px; /* УВЕЛИЧЕНО */
+            }
+
+            .main-image {
+                max-height: 450px; /* УВЕЛИЧЕНО */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .three-flex-container {
+                flex-direction: column;
+                width: 98%;
+            }
+
+            .flex-item {
+                flex: 1;
+                width: 100%;
+                max-width: 700px;
+                min-height: 500px; /* УВЕЛИЧЕНО */
+            }
+
+            .bottom-flex {
+                width: 98%;
+                padding: 20px;
+                min-height: 350px; /* УВЕЛИЧЕНО */
+            }
+
+            .flex-image {
+                max-height: 350px; /* УВЕЛИЧЕНО */
+            }
+
+            .main-image {
+                max-height: 400px; /* УВЕЛИЧЕНО */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-container {
+                padding: 15px;
+                gap: 20px;
+            }
+
+            .three-flex-container {
+                width: 100%;
+                gap: 15px;
+            }
+
+            .flex-item {
+                padding: 15px;
+                min-height: 400px; /* УВЕЛИЧЕНО */
+            }
+
+            .bottom-flex {
+                width: 100%;
+                padding: 15px;
+                min-height: 300px; /* УВЕЛИЧЕНО */
+            }
+
+            .next-button, .back-button {
+                width: 60px;
+            }
+
+            .flex-image {
+                max-height: 280px; /* УВЕЛИЧЕНО */
+            }
+
+            .main-image {
+                max-height: 320px; /* УВЕЛИЧЕНО */
+            }
+
+            .flex-text {
+                font-size: 0.9rem;
+            }
+
+            .course-text {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .flex-item {
+                min-height: 350px; /* УВЕЛИЧЕНО */
+                padding: 10px;
+            }
+
+            .flex-image {
+                max-height: 240px; /* УВЕЛИЧЕНО */
+            }
+
+            .main-image {
+                max-height: 280px; /* УВЕЛИЧЕНО */
+            }
+
+            .next-button, .back-button {
+                width: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Фон -->
+    <div class="background-container">
+        <img src="{% static 'myapp/images/main1.png' %}" alt="Фон" class="background-image">
+    </div>
+
+    <!-- Основной контейнер -->
+    <div class="main-container">
+        <!-- 3 флекса в ряд с картинками banktut21, banktut22, banktut23 -->
+        <div class="three-flex-container">
+            <div class="flex-item">
+                <img src="{% static 'myapp/images/banktut21.png' %}" alt="Bank Tutorial 21" class="flex-image">
+            </div>
+            <div class="flex-item">
+                <img src="{% static 'myapp/images/banktut22.png' %}" alt="Bank Tutorial 22" class="flex-image">
+            </div>
+            <div class="flex-item">
+                <img src="{% static 'myapp/images/banktut23.png' %}" alt="Bank Tutorial 23" class="flex-image">
+            </div>
+        </div>
+
+        <!-- Нижний флекс с картинкой и текстом -->
+        <div class="bottom-flex">
+            <div class="course-text">
+                РАЗДЕЛ С БОНУСАМИ НАХОДИТСЯ НА ГЛАВНОЙ СТРАНИЦЕ, НИКУДА ЛИСТАТЬ НЕ НАДО
+            </div>
+            <div class="course-text">
+                ТАКЖЕ В ЭТОМ РАЗДЕЛЕ МОЖНО ВЫБРАТЬ ЗА КАКИЕ ПОКУПКИ МЫ БУДЕМ ПОЛУЧАТЬ КЕШБЭК (АКЦИЯ, ПРИ КОТОРОЙ НАМ ВОЗВРАЩАЮТ КАКОЙ-ТО ПРОЦЕНТ ОТ ЦЕНЫ ТОВАРА)
+            </div>
+            <div class="course-text">
+                БОНУСАМИ МОЖНО ОПЛАЧИВАТЬ ДО 99% ТОВАРА, А ТАКЖЕ ИХ МОЖНО ОБМЕНИВАТЬ НА КУПОНЫ, СЕРТИФИКАТЫ. ИМИ МОЖНО ПЛАТИТЬ ЗА ЕДУ В РЕСТОРАНАХ И ЗА БРОНИРОВАНИЕ БИЛЕТОВ
+            </div>
+
+            <!-- Кнопка Назад в левом нижнем углу -->
+            <a href="{% url 'bank_course_5' %}">
+                <img src="{% static 'myapp/images/back.png' %}" alt="Назад" class="back-button">
+            </a>
+
+            <!-- Кнопка Далее в правом нижнем углу -->
+            <a href="{% url 'bank_course_7' %}">
+                <img src="{% static 'myapp/images/start.png' %}" alt="Далее" class="next-button">
+            </a>
+        </div>
+    </div>
+</body>
+</html>

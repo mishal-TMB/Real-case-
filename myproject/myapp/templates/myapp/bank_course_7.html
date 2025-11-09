@@ -1,0 +1,233 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сбербанк - Урок 7</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            min-height: 100vh;
+        }
+
+        /* Фон */
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .background-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Основной контейнер */
+        .main-container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Центральный флекс-контейнер */
+        .center-flex {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 95%;
+            height: 90vh;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: clamp(25px, 4vw, 50px);
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Основная картинка */
+        .main-image {
+            width: 100%;
+            height: auto;
+            max-height: 70%;
+            object-fit: contain;
+            border-radius: 15px;
+            margin-bottom: clamp(20px, 3vw, 40px);
+        }
+
+        /* Текст */
+        .course-text {
+            font-size: clamp(1.2rem, 2vw, 2.5rem);
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: clamp(20px, 3vw, 40px);
+            line-height: 1.4;
+            width: 100%;
+        }
+
+        /* Кнопка Далее */
+        .next-button {
+            width: clamp(80px, 10vw, 150px);
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: absolute;
+            bottom: clamp(15px, 2vw, 30px);
+            right: clamp(15px, 2vw, 30px);
+        }
+
+        .next-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Кнопка Назад */
+        .back-button {
+            width: clamp(70px, 8vw, 120px);
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: absolute;
+            bottom: clamp(15px, 2vw, 30px);
+            left: clamp(15px, 2vw, 30px);
+        }
+
+        .back-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1200px) {
+            .center-flex {
+                width: 98%;
+                height: 85vh;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .center-flex {
+                height: 80vh;
+                padding: 20px;
+            }
+
+            .main-image {
+                max-height: 65%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 15px;
+            }
+
+            .center-flex {
+                width: 100%;
+                height: 75vh;
+                padding: 15px;
+            }
+
+            .main-image {
+                max-height: 60%;
+                margin-bottom: 15px;
+            }
+
+            .course-text {
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-container {
+                padding: 10px;
+            }
+
+            .center-flex {
+                height: 70vh;
+                padding: 10px;
+            }
+
+            .main-image {
+                max-height: 50%;
+                margin-bottom: 10px;
+            }
+
+            .course-text {
+                font-size: clamp(1rem, 1.5vw, 1.8rem);
+                margin-bottom: 10px;
+            }
+
+            .next-button, .back-button {
+                width: 60px;
+                bottom: 10px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .center-flex {
+                height: 65vh;
+            }
+
+            .main-image {
+                max-height: 45%;
+            }
+
+            .course-text {
+                font-size: 0.9rem;
+            }
+
+            .next-button, .back-button {
+                width: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Фон -->
+    <div class="background-container">
+        <img src="{% static 'myapp/images/main1.png' %}" alt="Фон" class="background-image">
+    </div>
+
+    <!-- Основной контент -->
+    <div class="main-container">
+        <div class="center-flex">
+            <!-- Основная картинка -->
+
+            <!-- Текст -->
+            <div class="course-text">
+А ЕЩЕ В СБЕРБАНКЕ РЕАЛИЗОВАНА ОЧЕНЬ ПОЛЕЗНАЯ ФУНКЦИЯ: ВЫ МОЖЕТЕ СОХРАНЯТЬ ПЛАТЕЖИ, ДЛЯ ДАЛЬНЕЙШЕЙ ПОВТОРНОЙ ОПЛАТЫ
+            </div>
+            <div class="course-text">
+ТАКЖЕ, МОЖНО НАСТРОИТЬ АВТОПЛАТЕЖ.
+БАНК САМ БУДЕТ ОПЛАЧИВАТЬ НУЖНЫЕ ВАМ УСЛУГИ РАЗ В МЕСЯЦ В ВЫБРАННЫЙ ВАМИ ДЕНЬ!
+            </div>
+
+            <!-- Кнопка Назад -->
+            <a href="{% url 'bank_course_6' %}">
+                <img src="{% static 'myapp/images/back.png' %}" alt="Назад" class="back-button">
+            </a>
+
+            <!-- Кнопка Далее -->
+            <a href="{% url 'bank_course_8' %}">
+                <img src="{% static 'myapp/images/start.png' %}" alt="Далее" class="next-button">
+            </a>
+        </div>
+    </div>
+</body>
+</html>

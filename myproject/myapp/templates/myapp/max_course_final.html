@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Курс MAX - Завершение</title>
+    <style>
+        body {
+            background: #1a1a1a;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        h1 {
+            color: #4CAF50;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .congrats-text {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #4CAF50;
+            margin: 20px 0;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            transition: background 0.3s ease;
+            margin: 10px;
+        }
+        .back-button:hover {
+            background: #45a049;
+        }
+        .emoji {
+            font-size: 3rem;
+            margin: 20px 0;
+        }
+        .features-list {
+            text-align: left;
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        .features-list li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji">💬</div>
+        <h1>Поздравляем!</h1>
+        <p class="congrats-text">Вы успешно прошли курс по мессенджеру "MAX"!</p>
+
+        <p>Теперь вы знаете все основные функции приложения для общения:</p>
+
+        <ul class="features-list">
+            <li>✅ Добавление контактов и создание чатов</li>
+            <li>✅ Общение в личных и групповых беседах</li>
+            <li>✅ Подписка на каналы и ботов</li>
+            <li>✅ Обмен сообщениями и медиафайлами</li>
+            <li>✅ Поиск и добавление новых собеседников</li>
+        </ul>
+
+        <p>Общайтесь с друзьями, семьей и коллегами с помощью удобного мессенджера MAX!</p>
+        <p>Приятного общения! ✨</p>
+
+        <a href="{% url 'max_course_8' %}" class="back-button">← Назад к уроку</a>
+        <br>
+        <a href="{% url 'course_selection' %}" class="back-button">Выбрать другой курс</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,316 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сбербанк - Урок 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Фон */
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .background-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Основной контейнер */
+        .main-container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            gap: clamp(10px, 2vw, 20px);
+        }
+
+        /* Контейнер с 3 флексами в ряд */
+        .three-flex-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 98%;
+            max-width: 1600px;
+            gap: clamp(5px, 1vw, 10px); /* МИНИМАЛЬНОЕ РАССТОЯНИЕ */
+        }
+
+        /* Отдельный флекс */
+        .flex-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: clamp(15px, 2vw, 25px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            min-height: 400px; /* УВЕЛИЧЕНО */
+        }
+
+        /* Картинки в флексах - УВЕЛИЧЕНЫ В 2-3 РАЗА */
+        .flex-image {
+            width: 100%;
+            height: auto;
+            max-height: 500px; /* УВЕЛИЧЕНО */
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        /* Нижний флекс с картинкой и текстом */
+        .bottom-flex {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 98%;
+            max-width: 1600px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: clamp(20px, 3vw, 40px);
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            min-height: 350px; /* УВЕЛИЧЕНО */
+        }
+
+        /* Основная картинка в нижнем флексе - УВЕЛИЧЕНА В 2-3 РАЗА */
+        .main-image {
+            width: 100%;
+            height: auto;
+            max-height: 600px; /* УВЕЛИЧЕНО */
+            object-fit: contain;
+            border-radius: 15px;
+            margin-bottom: clamp(5px, 1vw, 10px);
+        }
+
+        /* Текст - УМЕНЬШЕН ЕЩЕ */
+        .course-text {
+            font-size: clamp(1.2rem, 2vw, 2.2rem);
+            color: white;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: clamp(5px, 1vw, 10px);
+            line-height: 1.2;
+            width: 100%;
+        }
+
+        /* Кнопка Далее */
+        .next-button {
+            width: clamp(80px, 10vw, 150px);
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: absolute;
+            bottom: clamp(10px, 1.5vw, 20px);
+            right: clamp(10px, 1.5vw, 20px);
+        }
+
+        .next-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Кнопка Назад */
+        .back-button {
+            width: clamp(70px, 8vw, 120px);
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: absolute;
+            bottom: clamp(10px, 1.5vw, 20px);
+            left: clamp(10px, 1.5vw, 20px);
+        }
+
+        .back-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1200px) {
+            .flex-image {
+                max-height: 400px;
+            }
+
+            .main-image {
+                max-height: 450px;
+            }
+
+            .flex-item {
+                min-height: 350px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .three-flex-container {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+            }
+
+            .flex-item {
+                flex: 0 1 calc(50% - 8px);
+                min-width: 300px;
+                min-height: 300px;
+            }
+
+            .flex-image {
+                max-height: 350px;
+            }
+
+            .main-image {
+                max-height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .three-flex-container {
+                flex-direction: column;
+                width: 99%;
+                gap: 5px;
+            }
+
+            .flex-item {
+                flex: 1;
+                width: 100%;
+                max-width: 600px;
+                min-height: 250px;
+            }
+
+            .bottom-flex {
+                width: 99%;
+                padding: 15px;
+                min-height: 300px;
+            }
+
+            .flex-image {
+                max-height: 300px;
+            }
+
+            .main-image {
+                max-height: 350px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-container {
+                padding: 5px;
+                gap: 8px;
+            }
+
+            .three-flex-container {
+                width: 100%;
+                gap: 4px;
+            }
+
+            .flex-item {
+                padding: 10px;
+                min-height: 200px;
+            }
+
+            .bottom-flex {
+                width: 100%;
+                padding: 10px;
+                min-height: 250px;
+            }
+
+            .next-button, .back-button {
+                width: 50px;
+            }
+
+            .flex-image {
+                max-height: 200px;
+            }
+
+            .main-image {
+                max-height: 250px;
+            }
+
+            .course-text {
+                font-size: 0.5rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .flex-item {
+                min-height: 180px;
+                padding: 8px;
+            }
+
+            .flex-image {
+                max-height: 160px;
+            }
+
+            .main-image {
+                max-height: 200px;
+            }
+
+            .next-button, .back-button {
+                width: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Фон -->
+    <div class="background-container">
+        <img src="{% static 'myapp/images/main1.png' %}" alt="Фон" class="background-image">
+    </div>
+
+    <!-- Основной контейнер -->
+    <div class="main-container">
+        <!-- 3 флекса в ряд с ОЧЕНЬ БОЛЬШИМИ картинками -->
+        <div class="three-flex-container">
+            <div class="flex-item">
+                <img src="{% static 'myapp/images/banktut1.png' %}" alt="Bank Tutorial 1" class="flex-image">
+            </div>
+            <div class="flex-item">
+                <img src="{% static 'myapp/images/banktut2.png' %}" alt="Bank Tutorial 2" class="flex-image">
+            </div>
+            <div class="flex-item">
+                <img src="{% static 'myapp/images/banktut3.png' %}" alt="Bank Tutorial 3" class="flex-image">
+            </div>
+        </div>
+
+        <!-- Нижний флекс с картинкой и текстом -->
+        <div class="bottom-flex">
+            <div class="course-text">
+                ЧТОБЫ ПЕРЕВЕСТИ ДЕНЬГИ, НУЖНО ПРОЛИСТАТЬ ВНИЗ ДО НАДПИСИ “ПЕРЕВОДЫ” И НАЖАТЬ НА ЗЕЛЕНУЮ СТРЕЛОЧКУ И ДАЛЕЕ ВЫСВЕТИТСЯ СЛЕДУЮЩЕЕ ОКНО С ВЫБОРОМ ПОЛУЧАТЕЛЯ, ГДЕ МОЖНО ЛИБО ВВЕСТИ НОМЕР, ЛИБО ВЫБРАТЬ ИЗ УЖЕ ИМЕЮЩИХСЯ НА ТЕЛЕФОНЕ
+            </div>
+
+            <!-- Кнопка Назад в левом нижнем углу -->
+            <a href="{% url 'bank_course' %}">
+                <img src="{% static 'myapp/images/back.png' %}" alt="Назад" class="back-button">
+            </a>
+
+            <!-- Кнопка Далее в правом нижнем углу -->
+            <a href="{% url 'bank_course_3' %}">
+                <img src="{% static 'myapp/images/start.png' %}" alt="Далее" class="next-button">
+            </a>
+        </div>
+    </div>
+</body>
+</html>

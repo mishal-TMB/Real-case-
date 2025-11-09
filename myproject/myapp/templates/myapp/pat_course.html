@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пятерочка доставка</title>
+    <!-- Тот же самый стиль -->
+</head>
+<body>
+    <div class="main-container">
+        <!-- Фон -->
+        <div class="background-container">
+            <img src="{% static 'myapp/images/main1.png' %}" alt="Фон" class="background-image">
+        </div>
+
+        <!-- Аватар -->
+        <div class="avatar-container">
+            <img src="{% static 'myapp/images/avatar.png' %}" alt="Аватар" class="avatar" id="avatarImage" onclick="changeAvatar()">
+        </div>
+
+        <!-- Основной контент -->
+        <div class="content-wrapper">
+            <div class="center-block">
+                <div class="course-title">
+                    <div class="course-title-text">Пятерочка доставка</div>
+                    <div style="font-size: clamp(1rem, 2vw, 2rem); margin-top: 20px;">
+                        Страница курса в разработке
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Кнопка "Назад" -->
+        <div class="back-button-container">
+            <a href="{% url 'course_selection' %}">
+                <img src="{% static 'myapp/images/back.png' %}" alt="Назад" class="back-button">
+            </a>
+        </div>
+
+        <!-- Кнопка снега -->
+        <button class="snow-toggle" id="snowToggle" onclick="toggleSnow()">❄️ Снег</button>
+    </div>
+
+    <script>
+        let isGojo = false;
+        let snowInterval;
+        let isSnowing = false;
+
+        function changeAvatar() {
+            const avatar = document.getElementById('avatarImage');
+            if (isGojo) {
+                avatar.src = "{% static 'myapp/images/avatar.png' %}";
+            } else {
+                avatar.src = "{% static 'myapp/images/Gojo.jpeg' %}";
+            }
+            isGojo = !isGojo;
+        }
+
+        function createSnowflake() {
+            if (!isSnowing) return;
+
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.innerHTML = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.opacity = Math.random() * 0.7 + 0.3;
+            snowflake.style.fontSize = (Math.random() * 8 + 6) + 'px';
+            snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+
+            document.body.appendChild(snowflake);
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, 10000);
+        }
+
+        function toggleSnow() {
+            const toggleButton = document.getElementById('snowToggle');
+            isSnowing = !isSnowing;
+
+            if (isSnowing) {
+                toggleButton.textContent = '❄️ Выкл';
+                toggleButton.style.background = 'rgba(173, 216, 230, 0.9)';
+                snowInterval = setInterval(createSnowflake, 100);
+            } else {
+                toggleButton.textContent = '❄️ Снег';
+                toggleButton.style.background = 'rgba(255, 255, 255, 0.9)';
+                clearInterval(snowInterval);
+                document.querySelectorAll('.snowflake').forEach(snowflake => {
+                    snowflake.remove();
+                });
+            }
+        }
+    </script>
+</body>
+</html>
