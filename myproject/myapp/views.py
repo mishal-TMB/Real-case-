@@ -22,7 +22,7 @@ def max_course_2(request):
         'page_title': 'MAX - Урок 2',
         'images': [
             {'path': 'myapp/images/maxtut1.png'},
-            {'path': 'myapp/images/maxtut2.png'},
+            {'path': 'myapp/images/maxtut22.png'},
         ],
         'course_text': 'Прежде чем начать общение в MAX, нужно добавить человека. Для этого нужно в меню снизу перейти во вкладку "контакты", а дальше нажать на плюсик. Ну а дальше у нас появляется два варианта: найти по номеру или добавить контантю Сейчас во всем разберемся! ',
         'back_page': 'max_course',
@@ -154,7 +154,7 @@ def apt_course_2(request):
         'images': [
             {'path': 'myapp/images/arttut1.png'},
             {'path': 'myapp/images/arttut2.png'},
-            {'path': 'myapp/images/arttut3.png'},
+            {'path': 'myapp/images/arttut44.png'},
             {'path': 'myapp/images/arttut4.png'},
         ],
         'course_text': 'В ПРИЛОЖЕНИИ ЕСТЬ ОЧЕНЬ УДОБНЫЙ ПОИСК ТОВАРОВ:ВЫ МОЖЕТЕ НАЙТИ НУЖНОЕ ЛЕКАРСТВО НЕ ТОЛЬКО ПО НАЗВАНИЮ, НО И ПО СИМПТОМАМ, ОТ КОТОРЫХ СОЗДАНО ЛЕКАРСТВО!А ЕСЛИ ВЫ ИЩЕТЕ ЛЕКАРСТВО ПО СИМПТОМАМ, ТО В ПРИЛОЖЕНИИ ЕСТЬ ФИЛЬТРАЦИЯ:МОЖНО ОТСОРТИРОВАТЬ ТОВАРЫ, ОСТАВИВ ТОЛЬКО ТЕ ЧТО ПОДХОДЯТ! В ПРИЛОЖЕНИИ ПРЕДЛОЖЕННО МНОГО РАЗНЫХ СВОЙСТВ, ПО КОТОРЫМ БУДЕТ ПРОХОДИТЬ ФИЛЬТРАЦИЯ',
@@ -180,7 +180,7 @@ def apt_course_4(request):
     context = {
         'page_title': 'ART - Урок 4',
         'images': [
-            {'path': 'myapp/images/arttut7.png'},
+            {'path': 'myapp/images/arttut55.png'},
             {'path': 'myapp/images/arttut8.png'},
         ],
         'course_text': 'МОЖНО ЗАРАНИЕ СОБРАТЬ ВСЕ ПОКУПКИ И ПРОСТО СРАЗУ ЗАБРАТЬ ИХ В УКАЗАННОЙ АПТЕКЕ, А МОЖНО ВЫБРАТЬ ДОСТАВКУ НА ДОМ. НО ЕСЛИ ЛЕКАРСТО СОДЕРЖИТ СПИРТ ИЛИ ПОКУПАЕТСЯ ТОЛЬКО ПРИ НАЛИЧИИ РЕЦЕПТА, ПРИДЕТЬСЯ ЗАБРАТЬ В АПТЕКЕ',
@@ -223,7 +223,7 @@ def pat_course_2(request):
         'images': [
             {'path': 'myapp/images/pattut1.png'},
             {'path': 'myapp/images/pattut2.png'},
-            {'path': 'myapp/images/pattut3.png'},
+            {'path': 'myapp/images/pattut22.png'},
             {'path': 'myapp/images/pattut4.png'},
             {'path': 'myapp/images/pattut5.png'},
         ],
